@@ -5,203 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projektverwaltung</title>
   <style>
-    body { 
-      background: #b0b0b0; 
-      font-family: monospace; 
-      margin: 0; 
-      padding: 20px; 
-    }
-    
-    .breadcrumb { 
-      position: fixed; 
-      top: 10px; 
-      left: 10px; 
-      display: flex; 
-      gap: 5px; 
-      z-index: 1001; 
-    }
-    
-    .breadcrumb-item { 
-      cursor: pointer; 
-      color: black; 
-      padding: 0 5px; 
-    }
-    
-    .breadcrumb-item:hover { 
-      color: blue; 
-    }
-    
-    #folderView, #pinView, #imageView { 
-      display: none; 
-    }
-    
-    #folderView { 
-      margin-top: 40px; 
-    }
-    
-    .folder { 
-      display: inline-block; 
-      text-align: center; 
-      margin: 15px; 
-      position: relative; 
-    }
-    
-    .folder-icon { 
-      width: 60px; 
-      height: 40px; 
-      background: black; 
-      position: relative; 
-      cursor: pointer; 
-    }
-    
-    .folder-icon::before { 
-      content: ""; 
-      position: absolute; 
-      top: -8px; 
-      left: 0; 
-      width: 20px; 
-      height: 8px; 
-      background: black; 
-    }
-    
-    .folder-name { 
-      margin-top: 5px; 
-      color: black; 
-    }
-    
-    .folder-delete { 
-      position: absolute; 
-      top: -15px; 
-      right: -15px; 
-      color: black; 
-      display: none; 
-      cursor: pointer; 
-      font-size: 20px;
-    }
-    
-    .edit-mode .folder-delete { 
-      display: block; 
-    }
-    
-    button { 
-      background: none; 
-      border: none; 
-      padding: 10px 15px;
-      cursor: pointer; 
-      font-size: 16px;
-    }
-    
-    #headerButtons { 
-      position: fixed; 
-      top: 10px; 
-      right: 10px; 
-      display: flex; 
-      gap: 15px; 
-    }
-    
-    .image-gallery { 
-      display: block;
-      margin-top: 60px;
-      padding: 20px;
-    }
-    
-    .thumbnail-container { 
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto 40px;
-      position: relative;
-    }
-    
-    .thumbnail { 
-      width: 100%;
-      height: auto;
-      max-height: 80vh;
-      object-fit: contain;
-    }
-    
-    .delete-image { 
-      position: absolute; 
-      top: 5px; 
-      right: 5px; 
-      color: black; 
-      display: none; 
-      cursor: pointer; 
-      font-size: 20px;
-      z-index: 100;
-    }
-    
-    .favorite-btn { 
-      position: absolute;
-      bottom: -25px;
-      left: 10px;
-      color: black;
-      font-weight: bold;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 2px 5px;
-      font-size: 14px;
-    }
-    
-    .favorite-btn.active { 
-      color: #ff69b4;
-    }
-    
-    .edit-mode .delete-image { 
-      display: block; 
-    }
-    
-    #pinView {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1003;
-    }
-    
-    #pinInput {
-      border: 2px solid black;
-      padding: 8px;
-      margin-right: 10px;
-    }
-
-    #downloadFavorites {
-      border: none !important;
-      color: #ff69b4;
-      padding: 5px 10px;
-    }
-
-    @media (max-width: 768px) {
-      .thumbnail-container {
-        max-width: 95%;
-      }
-    }
+    body { background: #b0b0b0; font-family: monospace; margin: 0; padding: 20px; }
+    .breadcrumb { position: fixed; top: 10px; left: 10px; display: flex; gap: 5px; z-index: 1001; }
+    .breadcrumb-item { cursor: pointer; color: black; padding: 0 5px; }
+    .breadcrumb-item:hover { color: blue; }
+    #folderView, #pinView, #imageView { display: none; }
+    #folderView { margin-top: 40px; }
+    .folder { display: inline-block; text-align: center; margin: 15px; position: relative; }
+    .folder-icon { width: 60px; height: 40px; background: black; position: relative; cursor: pointer; }
+    .folder-icon::before { content: ""; position: absolute; top: -8px; left: 0; width: 20px; height: 8px; background: black; }
+    .folder-name { margin-top: 5px; color: black; }
+    .folder-delete { position: absolute; top: -15px; right: -15px; color: black; display: none; cursor: pointer; font-size: 20px; }
+    .edit-mode .folder-delete { display: block; }
+    button { background: none; border: none; padding: 10px 15px; cursor: pointer; font-size: 16px; }
+    #headerButtons { position: fixed; top: 10px; right: 10px; display: flex; gap: 15px; }
+    .image-gallery { display: block; margin-top: 60px; padding: 20px; }
+    .thumbnail-container { width: 100%; max-width: 1000px; margin: 0 auto 40px; position: relative; }
+    .thumbnail { width: 100%; height: auto; max-height: 80vh; object-fit: contain; }
+    .delete-image { position: absolute; top: 5px; right: 5px; color: black; display: none; cursor: pointer; font-size: 20px; z-index: 100; }
+    .edit-mode .delete-image { display: block; }
+    #pinView { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1003; }
+    #pinInput { border: 2px solid black; padding: 8px; margin-right: 10px; }
+    @media (max-width: 768px) { .thumbnail-container { max-width: 95%; } }
   </style>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 </head>
 <body>
   <div class="breadcrumb"></div>
   <div id="headerButtons">
     <button id="editButton">Edit</button>
-    <button id="downloadFavorites" style="display:none">↓ Favoriten</button>
     <button id="addProject" style="display:none">+ Neuer Ordner</button>
-    <button id="uploadButton" style="display:none">↑ Hochladen</button>
+    <button id="uploadButton" style="display:none">↑ Hochladen / Vimeo-Link</button>
   </div>
-
-  <div id="folderView">
-    <div id="foldersContainer"></div>
-  </div>
-
+  <div id="folderView"><div id="foldersContainer"></div></div>
   <div id="pinView" style="display:none;">
     <input type="password" id="pinInput" placeholder="PIN">
     <button id="submitPin">OK</button>
     <button id="cancelPin">Abbrechen</button>
   </div>
-
   <div id="imageView">
     <div class="image-gallery"></div>
     <input type="file" id="imageUpload" multiple accept="image/*" style="display:none">
@@ -217,7 +60,6 @@
       appId: "1:615121748216:web:d60808a70e5e869b743b0d",
       measurementId: "G-HNP0ZS7VDW"
     };
-
     const app = firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     const storage = firebase.storage();
@@ -226,17 +68,12 @@
     let currentPath = [];
     let currentFolderId = null;
     let currentImages = [];
-    let favorites = [];
     let currentPendingFolder = null;
     let unsubscribeFolders = null;
 
     function initFirestoreListener() {
       if (unsubscribeFolders) unsubscribeFolders();
-      
-      const parentId = currentPath.length > 0 
-        ? currentPath[currentPath.length - 1].id 
-        : null;
-
+      const parentId = currentPath.length > 0 ? currentPath[currentPath.length - 1].id : null;
       unsubscribeFolders = db.collection('projects')
         .where('parentId', '==', parentId)
         .orderBy('createdAt')
@@ -249,7 +86,6 @@
     async function renderFolders(docs) {
       const container = document.getElementById('foldersContainer');
       container.innerHTML = '';
-
       docs.forEach(doc => {
         const project = doc.data();
         const folder = document.createElement('div');
@@ -259,48 +95,41 @@
           <div class="folder-name">${project.name}</div>
           <div class="folder-delete">×</div>
         `;
-
         folder.querySelector('.folder-icon').addEventListener('click', async () => {
-          const docSnap = await db.collection('projects').doc(doc.id).get();
-          const data = docSnap.data();
-          
+          const data = (await db.collection('projects').doc(doc.id).get()).data();
           if (data.pin) {
             currentPendingFolder = doc.id;
             document.getElementById('pinView').style.display = 'block';
           } else {
-            currentPath.push({ id: doc.id, name: project.name });
-            currentFolderId = doc.id;
-            updateBreadcrumb();
-            initFirestoreListener();
-            showImageView();
+            enterFolder(doc.id, project.name);
           }
         });
-
-        folder.querySelector('.folder-delete').addEventListener('click', async (e) => {
+        folder.querySelector('.folder-delete').addEventListener('click', async e => {
           e.stopPropagation();
-          if (confirm('Ordner und alle Unterordner sowie Bilder löschen?')) {
+          if (confirm('Ordner und alles darin löschen?')) {
             await deleteFolder(doc.id);
             initFirestoreListener();
           }
         });
-
         container.appendChild(folder);
       });
     }
 
-    async function deleteFolder(folderId) {
-      const subfolders = await db.collection('projects').where('parentId', '==', folderId).get();
-      await Promise.all(subfolders.docs.map(doc => deleteFolder(doc.id)));
+    function enterFolder(id, name) {
+      currentPath.push({ id, name });
+      currentFolderId = id;
+      updateBreadcrumb();
+      initFirestoreListener();
+      showImageView();
+    }
 
-      const docRef = db.collection('projects').doc(folderId);
-      const doc = await docRef.get();
+    async function deleteFolder(folderId) {
+      const subs = await db.collection('projects').where('parentId','==',folderId).get();
+      await Promise.all(subs.docs.map(d => deleteFolder(d.id)));
+      const doc = await db.collection('projects').doc(folderId).get();
       const images = doc.data().images || [];
-      
-      await Promise.all(images.map(url => 
-        storage.refFromURL(url).delete().catch(console.error)
-      ));
-      
-      await docRef.delete();
+      await Promise.all(images.map(url => storage.refFromURL(url).delete().catch(console.error)));
+      await db.collection('projects').doc(folderId).delete();
     }
 
     async function checkPin() {
@@ -310,42 +139,33 @@
 
     document.getElementById('submitPin').addEventListener('click', async () => {
       if (await checkPin()) {
-        currentPath.push({ 
-          id: currentPendingFolder, 
-          name: (await db.collection('projects').doc(currentPendingFolder).get()).data().name 
-        });
-        currentFolderId = currentPendingFolder;
-        updateBreadcrumb();
-        initFirestoreListener();
-        showImageView();
+        const doc = await db.collection('projects').doc(currentPendingFolder).get();
+        enterFolder(currentPendingFolder, doc.data().name);
         document.getElementById('pinView').style.display = 'none';
       } else {
         alert('Falscher PIN!');
       }
     });
-
     document.getElementById('cancelPin').addEventListener('click', () => {
       document.getElementById('pinView').style.display = 'none';
     });
 
     function updateBreadcrumb() {
       const bc = document.querySelector('.breadcrumb');
-      bc.innerHTML = currentPath.reduce((acc, cur, index) => {
-        return acc + `<div class="breadcrumb-item" data-index="${index}">${cur.name}</div> / `;
-      }, '<div class="breadcrumb-item" data-index="-1">Jean Wolf</div> / ');
-
-      document.querySelectorAll('.breadcrumb-item').forEach(item => {
+      bc.innerHTML = currentPath.reduce((acc, cur, idx) =>
+          acc + `<div class="breadcrumb-item" data-index="${idx}">${cur.name}</div> / `,
+        '<div class="breadcrumb-item" data-index="-1">Jean Wolf</div> / '
+      );
+      bc.querySelectorAll('.breadcrumb-item').forEach(item => {
         item.addEventListener('click', () => {
-          const index = parseInt(item.dataset.index);
-          if (index === -1) {
-            currentPath = [];
-            currentFolderId = null;
+          const idx = parseInt(item.dataset.index);
+          if (idx === -1) {
+            currentPath = []; currentFolderId = null;
           } else {
-            currentPath = currentPath.slice(0, index + 1);
-            currentFolderId = currentPath[index].id;
+            currentPath = currentPath.slice(0, idx + 1);
+            currentFolderId = currentPath[idx].id;
           }
           updateBreadcrumb();
-          initFirestoreListener();
           showFolderView();
         });
       });
@@ -354,97 +174,79 @@
     async function renderImageGallery() {
       const gallery = document.querySelector('.image-gallery');
       gallery.innerHTML = '';
-      
       if (!currentFolderId) return;
-      
       const doc = await db.collection('projects').doc(currentFolderId).get();
       currentImages = doc.exists ? doc.data().images || [] : [];
-      favorites = doc.data().favorites || [];
-
-      document.getElementById('downloadFavorites').style.display = 
-        favorites.length > 0 ? 'block' : 'none';
 
       currentImages.forEach((url, index) => {
         const container = document.createElement('div');
         container.className = 'thumbnail-container';
+        let content = '';
+
+        if (/vimeo\.com/.test(url)) {
+          const match = url.match(/vimeo\.com\/(\d+)/);
+          const vid = match ? match[1] : null;
+          content = vid
+            ? `<iframe src="https://player.vimeo.com/video/${vid}" width="100%" height="500" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+            : `<div style="color:red;">Ungültiger Vimeo-Link</div>`;
+        } else {
+          content = `<img src="${url}" class="thumbnail">`;
+        }
+
         container.innerHTML = `
-          <img src="${url}" class="thumbnail">
+          ${content}
           <div class="delete-image" data-index="${index}">×</div>
-          <button class="favorite-btn ${favorites.includes(url) ? 'active' : ''}">FAV</button>
         `;
-
-        const favBtn = container.querySelector('.favorite-btn');
-        favBtn.addEventListener('click', async (e) => {
-          e.stopPropagation();
-          await toggleFavorite(url, favBtn);
-        });
-
-        container.querySelector('.delete-image').addEventListener('click', async (e) => {
+        container.querySelector('.delete-image').addEventListener('click', async e => {
           e.stopPropagation();
           await deleteImage(index);
         });
-
         gallery.appendChild(container);
       });
-    }
-
-    async function toggleFavorite(url, btn) {
-      const docRef = db.collection('projects').doc(currentFolderId);
-      const isFavorite = favorites.includes(url);
-      
-      if (isFavorite) {
-        favorites = favorites.filter(f => f !== url);
-      } else {
-        favorites.push(url);
-      }
-      
-      btn.classList.toggle('active', !isFavorite);
-      await docRef.update({ favorites });
-      
-      document.getElementById('downloadFavorites').style.display = 
-        favorites.length > 0 ? 'block' : 'none';
     }
 
     async function deleteImage(index) {
       const docRef = db.collection('projects').doc(currentFolderId);
       const doc = await docRef.get();
-      const images = [...doc.data().images];
-      const [url] = images.splice(index, 1);
-      
-      await storage.refFromURL(url).delete();
-      await docRef.update({ images });
+      const imgs = [...(doc.data().images || [])];
+      const [url] = imgs.splice(index, 1);
+      if (!/vimeo\.com/.test(url)) {
+        await storage.refFromURL(url).delete().catch(console.error);
+      }
+      await docRef.update({ images: imgs });
       renderImageGallery();
     }
 
-    document.getElementById('uploadButton').addEventListener('click', () => {
-      document.getElementById('imageUpload').click();
-    });
-
-    document.getElementById('imageUpload').addEventListener('change', async function(e) {
+    document.getElementById('uploadButton').addEventListener('click', async () => {
       if (!currentFolderId) {
         alert('Bitte Ordner auswählen!');
         return;
       }
-
-      const files = Array.from(e.target.files);
-      
-      for (const file of files) {
-        try {
-          const sanitizedName = file.name.replace(/[^a-z0-9_.-]/gi, '_');
-          const storageRef = storage.ref(
-            `projects/${currentFolderId}/${Date.now()}_${sanitizedName}`
-          );
-          
-          await storageRef.put(file);
-          const url = await storageRef.getDownloadURL();
-          
+      const choice = confirm('OK = Bild hochladen, Abbrechen = Vimeo-Link hinzufügen');
+      if (choice) {
+        document.getElementById('imageUpload').click();
+      } else {
+        const vUrl = prompt('Vimeo-Video-URL:');
+        if (vUrl && /vimeo\.com/.test(vUrl)) {
           await db.collection('projects').doc(currentFolderId).update({
-            images: firebase.firestore.FieldValue.arrayUnion(url)
+            images: firebase.firestore.FieldValue.arrayUnion(vUrl)
           });
-        } catch (error) {
-          console.error('Upload Fehler:', error);
-          alert(`Fehler bei ${file.name}: ${error.message}`);
+          renderImageGallery();
+        } else {
+          alert('Ungültige Vimeo-URL.');
         }
+      }
+    });
+
+    document.getElementById('imageUpload').addEventListener('change', async function(e) {
+      const files = Array.from(e.target.files);
+      for (const file of files) {
+        const safeName = file.name.replace(/[^a-z0-9_.-]/gi, '_');
+        const ref = storage.ref(`projects/${currentFolderId}/${Date.now()}_${safeName}`);
+        await ref.put(file);
+        const url = await ref.getDownloadURL();
+        await db.collection('projects').doc(currentFolderId)
+          .update({ images: firebase.firestore.FieldValue.arrayUnion(url) });
       }
       this.value = '';
       renderImageGallery();
@@ -462,71 +264,27 @@
       const name = prompt('Ordnername:');
       const pin = prompt('PIN (optional):');
       if (!name) return;
-
-      try {
-        await db.collection('projects').add({
-          name: name.trim(),
-          pin: pin || null,
-          parentId: currentFolderId,
-          images: [],
-          favorites: [],
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          lastModified: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        initFirestoreListener();
-      } catch (error) {
-        alert('Fehler: ' + error.message);
-      }
+      await db.collection('projects').add({
+        name: name.trim(),
+        pin: pin || null,
+        parentId: currentFolderId,
+        images: [],
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        lastModified: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      initFirestoreListener();
     });
-
-    async function downloadAllFavorites() {
-      if (favorites.length === 0) {
-        alert('Keine favorisierten Bilder vorhanden!');
-        return;
-      }
-
-      const zip = new JSZip();
-      const folder = zip.folder("favorites");
-      
-      try {
-        const promises = favorites.map(async (url, index) => {
-          try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`Fehler beim Laden: ${response.status}`);
-            const blob = await response.blob();
-            const filename = url.split('/').pop().split('?')[0];
-            folder.file(filename, blob);
-          } catch (error) {
-            console.error(`Fehler bei Bild ${index + 1}:`, error);
-          }
-        });
-
-        await Promise.all(promises);
-        
-        const content = await zip.generateAsync({ type: "blob" });
-        saveAs(content, "favorites.zip");
-      } catch (error) {
-        console.error('Download error:', error);
-        alert('Fehler beim Erstellen des ZIP-Archivs!');
-      }
-    }
-
-    document.getElementById('downloadFavorites').addEventListener('click', downloadAllFavorites);
 
     function showFolderView() {
       document.getElementById('folderView').style.display = 'block';
       document.getElementById('imageView').style.display = 'none';
       document.getElementById('pinView').style.display = 'none';
-      document.getElementById('downloadFavorites').style.display = 'none';
       initFirestoreListener();
     }
-
     function showImageView() {
       document.getElementById('folderView').style.display = 'none';
       document.getElementById('imageView').style.display = 'block';
-      document.getElementById('pinView').style.display = 'none';
-      document.getElementById('downloadFavorites').style.display = 
-        favorites.length > 0 ? 'block' : 'none';
+      renderImageGallery();
     }
 
     updateBreadcrumb();
